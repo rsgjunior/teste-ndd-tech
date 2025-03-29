@@ -442,3 +442,4 @@
 /home/rsgjunior/github/ndd-tech-test/svc/RoboApi.Tests/bin/Debug/net9.0/runtimes/win/lib/net9.0/System.Diagnostics.EventLog.Messages.dll
 /home/rsgjunior/github/ndd-tech-test/svc/RoboApi.Tests/bin/Debug/net9.0/runtimes/win/lib/net9.0/System.Diagnostics.EventLog.dll
 /home/rsgjunior/github/ndd-tech-test/svc/RoboApi.Tests/obj/Debug/net9.0/MvcTestingAppManifest.json
+/home/rsgjunior/github/ndd-tech-test/svc/RoboApi.Tests/obj/Debug/net9.0/RoboApi.Tests.sourcelink.json

@@ -12,10 +12,10 @@ public class Elbow
         ElbowPosition.StronglyContracted
     ];
 
-    public SequencialMovement<ElbowPosition> Rotation { get; }
+    public SequentialMovement<ElbowPosition> Rotation { get; }
 
     public Elbow(ElbowPosition startPosition = ElbowPosition.Rest)
     {
-        Rotation = new SequencialMovement<ElbowPosition>(ValidRotations, startPosition);
+        Rotation = new SequentialMovement<ElbowPosition>(ValidRotations, startPosition);
     }
 }

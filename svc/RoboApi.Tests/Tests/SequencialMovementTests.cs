@@ -9,7 +9,7 @@ public class SequencialMovementTests
     [Fact]
     public void ShouldAllowSequentialMovementsInOrder()
     {
-        var movement = new SequencialMovement<int>(ValidMoveSet, 3);
+        var movement = new SequentialMovement<int>(ValidMoveSet, 3);
 
         var exception = Record.Exception(() =>
         {
@@ -30,7 +30,7 @@ public class SequencialMovementTests
     [Fact]
     public void ShouldNotAllowSkippingPositions()
     {
-        var movement = new SequencialMovement<int>(ValidMoveSet, 1);
+        var movement = new SequentialMovement<int>(ValidMoveSet, 1);
 
         Assert.Throws<InvalidOperationException>(() =>
             movement.MoveTo(3));
@@ -40,13 +40,13 @@ public class SequencialMovementTests
     public void ShouldThrowWhenStartPositionNotInMoveSet()
     {
         Assert.Throws<ArgumentException>(() =>
-            new SequencialMovement<int>(ValidMoveSet, 10));
+            new SequentialMovement<int>(ValidMoveSet, 10));
     }
 
     [Fact]
     public void ShouldNotAllowMoveToInvalidPosition()
     {
-        var movement = new SequencialMovement<int>(ValidMoveSet, 1);
+        var movement = new SequentialMovement<int>(ValidMoveSet, 1);
 
         Assert.Throws<InvalidOperationException>(() =>
             movement.MoveTo(10));

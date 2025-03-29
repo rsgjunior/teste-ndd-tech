@@ -20,17 +20,17 @@ public class Head
         HeadInclination.Down
     ];
 
-    private SequencialMovement<HeadRotation> rotation { get; }
+    private SequentialMovement<HeadRotation> rotation { get; }
 
-    private SequencialMovement<HeadInclination> inclination { get; }
+    private SequentialMovement<HeadInclination> inclination { get; }
 
     public HeadRotationState Rotation => new HeadRotationState(rotation.CurrentPosition);
     public HeadInclinationState Inclination => new HeadInclinationState(inclination.CurrentPosition);
 
     public Head()
     {
-        rotation = new SequencialMovement<HeadRotation>(ValidRotations, HeadRotation.Rest);
-        inclination = new SequencialMovement<HeadInclination>(ValidInclinations, HeadInclination.Rest);
+        rotation = new SequentialMovement<HeadRotation>(ValidRotations, HeadRotation.Rest);
+        inclination = new SequentialMovement<HeadInclination>(ValidInclinations, HeadInclination.Rest);
     }
 
     public Head Rotate(HeadRotation position)

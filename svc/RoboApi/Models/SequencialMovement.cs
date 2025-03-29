@@ -1,11 +1,11 @@
 namespace RoboApi.Models;
 
-public class SequencialMovement<T>
+public class SequentialMovement<T>
 {
     private readonly T[] _moveSet;
     private T _currentPosition;
 
-    public SequencialMovement(T[] moveSet, T startPosition)
+    public SequentialMovement(T[] moveSet, T startPosition)
     {
         _moveSet = moveSet;
         if (!moveSet.Contains(startPosition))
@@ -16,7 +16,7 @@ public class SequencialMovement<T>
 
     public T CurrentPosition => _currentPosition;
 
-    public SequencialMovement<T> MoveTo(T position)
+    public SequentialMovement<T> MoveTo(T position)
     {
         if (!ValidateMove(position))
             throw new InvalidOperationException("Invalid move");

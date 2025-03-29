@@ -31,3 +31,4 @@
 /home/rsgjunior/github/ndd-tech-test/svc/RoboApi/obj/Debug/net9.0/RoboApi.pdb
 /home/rsgjunior/github/ndd-tech-test/svc/RoboApi/obj/Debug/net9.0/RoboApi.genruntimeconfig.cache
 /home/rsgjunior/github/ndd-tech-test/svc/RoboApi/obj/Debug/net9.0/ref/RoboApi.dll
+/home/rsgjunior/github/ndd-tech-test/svc/RoboApi/obj/Debug/net9.0/RoboApi.sourcelink.json

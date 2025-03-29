@@ -15,10 +15,10 @@ public class Wrist
         WristPosition.Rotation180
     ];
 
-    public SequencialMovement<WristPosition> Rotation { get; }
+    public SequentialMovement<WristPosition> Rotation { get; }
 
     public Wrist(WristPosition startPosition = WristPosition.Rest)
     {
-        Rotation = new SequencialMovement<WristPosition>(ValidRotations, startPosition);
+        Rotation = new SequentialMovement<WristPosition>(ValidRotations, startPosition);
     }
 }
