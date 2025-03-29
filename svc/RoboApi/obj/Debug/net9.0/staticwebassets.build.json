@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "pmJaBMCykJyj2v+Y3ISIObVjcyThY5LSluIlUaqhr6g=",
+  "Source": "RoboApi",
+  "BasePath": "_content/RoboApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
