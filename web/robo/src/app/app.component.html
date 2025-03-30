@@ -1,0 +1,172 @@
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+  <h1 class="text-3xl font-bold text-center mb-6">Interface de Controle do Robô</h1>
+
+  <mat-card class="mb-6 shadow-md">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-medium">Controles</mat-card-title>
+      <mat-card-subtitle>Ajuste as partes do robô</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group [(selectedIndex)]="selectedTabIndex" animationDuration="0ms">
+        <!-- Tab de Braços -->
+        <mat-tab label="Braços">
+          <div class="py-4">
+            <!-- Braço Esquerdo -->
+            <div class="mb-6">
+              <h3 class="font-medium mb-3">Braço Esquerdo</h3>
+
+              <!-- Cotovelo Esquerdo -->
+              <div class="mb-4">
+                <p class="text-sm text-gray-600 mb-2">
+                  Cotovelo: {{ robot().leftArm.elbow.currentPosition | positionTranslate }}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  @for (position of robot().leftArm.elbow.getMoveSet() | keyvalue; track position.key) {
+                  <button mat-raised-button
+                    [ngClass]="{'current-position': robot().leftArm.elbow.currentPosition === position.value}"
+                    (click)="handleMovement('leftElbow', position.value)" class="text-sm">
+                    {{ position.value | positionTranslate }}
+                  </button>
+                  }
+                </div>
+              </div>
+
+              <!-- Pulso Esquerdo -->
+              <div class="mb-4">
+                <p class="text-sm text-gray-600 mb-2">
+                  Pulso: {{ robot().leftArm.wrist.currentPosition | positionTranslate }}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  @for (position of robot().leftArm.wrist.getMoveSet() | keyvalue; track position.key) {
+                  <button mat-raised-button
+                    [ngClass]="{'current-position': robot().leftArm.wrist.currentPosition === position.value}"
+                    [disabled]="robot().leftArm.elbow.currentPosition !== ElbowPosition.StronglyContracted"
+                    (click)="handleMovement('leftWrist', position.value)" class="text-sm">
+                    {{ position.value | positionTranslate }}
+                  </button>
+                  }
+                </div>
+                @if (robot().leftArm.elbow.currentPosition !== ElbowPosition.StronglyContracted) {
+                <p class="text-xs text-gray-500 italic mt-2">
+                  Nota: O pulso só pode se mover quando o cotovelo está "Fortemente Contraído"
+                </p>
+                }
+              </div>
+            </div>
+
+            <mat-divider class="my-4"></mat-divider>
+
+            <!-- Braço Direito -->
+            <div class="mt-6">
+              <h3 class="font-medium mb-3">Braço Direito</h3>
+
+              <!-- Cotovelo Direito -->
+              <div class="mb-4">
+                <p class="text-sm text-gray-600 mb-2">
+                  Cotovelo: {{ robot().rightArm.elbow.currentPosition | positionTranslate }}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  @for (position of robot().rightArm.elbow.getMoveSet() | keyvalue; track position.key) {
+                  <button mat-raised-button
+                    [ngClass]="{'current-position': robot().rightArm.elbow.currentPosition === position.value}"
+                    (click)="handleMovement('rightElbow', position.value)" class="text-sm">
+                    {{ position.value | positionTranslate }}
+                  </button>
+                  }
+                </div>
+              </div>
+
+              <!-- Pulso Direito -->
+              <div class="mb-4">
+                <p class="text-sm text-gray-600 mb-2">
+                  Pulso: {{ robot().rightArm.wrist.currentPosition | positionTranslate }}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  @for (position of robot().rightArm.wrist.getMoveSet() | keyvalue; track position.key) {
+                  <button mat-raised-button
+                    [ngClass]="{'current-position': robot().rightArm.wrist.currentPosition === position.value}"
+                    [disabled]="robot().rightArm.elbow.currentPosition !== ElbowPosition.StronglyContracted"
+                    (click)="handleMovement('rightWrist', position.value)" class="text-sm">
+                    {{ position.value | positionTranslate }}
+                  </button>
+                  }
+                </div>
+                @if (robot().rightArm.elbow.currentPosition !== ElbowPosition.StronglyContracted) {
+                <p class="text-xs text-gray-500 italic mt-2">
+                  Nota: O pulso só pode se mover quando o cotovelo está "Fortemente Contraído"
+                </p>
+                }
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+
+        <!-- Tab de Cabeça -->
+        <mat-tab label="Cabeça">
+          <div class="py-4">
+            <!-- Rotação da Cabeça -->
+            <div class="mb-4">
+              <p class="text-sm text-gray-600 mb-2">
+                Rotação: {{ robot().head.rotation.currentPosition | positionTranslate }}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                @for (position of robot().head.rotation.getMoveSet() | keyvalue; track position.key) {
+                <button mat-raised-button
+                  [ngClass]="{'current-position': robot().head.rotation.currentPosition === position.value}"
+                  [disabled]="robot().head.inclination.currentPosition === HeadInclinationPosition.Down"
+                  (click)="handleMovement('headRotation', position.value)" class="text-sm">
+                  {{ position.value | positionTranslate }}
+                </button>
+                }
+              </div>
+              @if (robot().head.inclination.currentPosition === HeadInclinationPosition.Down) {
+              <p class="text-xs text-gray-500 italic mt-2">
+                Nota: A cabeça só pode rotacionar quando a inclinação não está "Para Baixo"
+              </p>
+              }
+            </div>
+
+            <!-- Inclinação da Cabeça -->
+            <div class="mb-4">
+              <p class="text-sm text-gray-600 mb-2">
+                Inclinação: {{ robot().head.inclination.currentPosition | positionTranslate }}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                @for (position of robot().head.inclination.getMoveSet() | keyvalue; track position.key) {
+                <button mat-raised-button
+                  [ngClass]="{'current-position': robot().head.inclination.currentPosition === position.value}"
+                  (click)="handleMovement('headInclination', position.value)" class="text-sm">
+                  {{ position.value | positionTranslate }}
+                </button>
+                }
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="shadow-md">
+    <mat-card-header>
+      <mat-card-title class="text-xl font-medium">Regras de Movimento</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="p-4">
+      <ul class="space-y-2 text-sm">
+        <li class="flex items-start">
+          <span class="mr-2">•</span>
+          <span>O pulso só pode se mover quando o cotovelo está "Fortemente Contraído"</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-2">•</span>
+          <span>A cabeça só pode rotacionar quando a inclinação não está "Para Baixo"</span>
+        </li>
+        <li class="flex items-start">
+          <span class="mr-2">•</span>
+          <span>Todos os movimentos devem seguir a ordem sequencial (sem pular posições)</span>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+
+</div>
